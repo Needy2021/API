@@ -9,7 +9,7 @@ class User(JSONMixin, AbstractUser):
     """
     """
 
-    json_fields= ['first_name', 'last_name', 'email', 'phone']
+    json_fields= ['first_name', 'last_name', 'email', 'phone', 'offers', 'favorites']
 
     phone = models.CharField(max_length=15, blank=True, default="")
     # position = models. # Type to determine
