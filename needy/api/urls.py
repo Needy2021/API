@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path, include
 
-from .views import UserView, OfferView
+from . import views
 
 urlpatterns = [
     path("", include("django_routeview")),
