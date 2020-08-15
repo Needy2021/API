@@ -25,7 +25,7 @@ class Offer(JSONMixin, models.Model):
     """
     """
 
-    json_fields = ['price', 'title', 'description', 'offeror', 'images', 'basketitems']
+    json_fields = ['price', 'title', 'description', 'offeror', 'images']
 
     price = models.IntegerField()
     title = models.CharField(max_length=128)
