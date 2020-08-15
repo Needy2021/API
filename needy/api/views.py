@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from django_modelapiview import APIView
 
-from .models import User, Offer, BasketItem, Message
+from .models import User, Offer, BasketItem, Message, Image
 
 class UserView(APIView):
     model = User
@@ -24,3 +24,8 @@ class BasketItemView(APIView):
 class MessageView(APIView):
     model = Message
     route = "messages"
+
+
+class ImageView(APIView):
+    model = Image
+    route = "images"

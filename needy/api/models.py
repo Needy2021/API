@@ -39,10 +39,12 @@ class Offer(JSONMixin, models.Model):
     # basketitems # Backref from BasketItem offer 1:N
 
 
-class Image(models.Model):
+class Image(JSONMixin, models.Model):
     """
      Used to store multiple images in one offer
     """
+
+    json_fields = ['image', 'offer']
 
     image = models.ImageField()
     offer = models.ForeignKey("Offer", on_delete=models.CASCADE, related_name="images")
