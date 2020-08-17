@@ -21,10 +21,10 @@ class User(JSONMixin, AbstractUser):
     # messages_sent # Backref from Message user_from 1:N
     # messages_received # Backref from Message user_to 1:N
 
-    def __init__(self, *args, **kwargs):
-        if 'password' in kwargs:
-            kwargs['password'] = make_password(kwargs['password'])
-        super().__init__(self, *args, **kwargs)
+    def save(self, *args, **kwargs):
+        if not "_" in self.password:
+            self.password = make_password(self.password)
+        super().save(*args, **kwargs)
 
 
 class Offer(JSONMixin, models.Model):
