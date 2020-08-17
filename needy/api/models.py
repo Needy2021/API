@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.hashers import make_password
 
 from django_modelapiview import JSONMixin
 
@@ -9,7 +10,7 @@ class User(JSONMixin, AbstractUser):
     """
     """
 
-    json_fields= ['first_name', 'last_name', 'email', 'phone', 'offers', 'favorites', 'basket', 'messages_sent', 'messages_received']
+    json_fields = ['first_name', 'last_name', 'email', 'phone', 'offers', 'favorites', 'basket', 'messages_sent', 'messages_received']
 
     phone = models.CharField(max_length=15, blank=True, default="")
     # position = models. # Type to determine
@@ -19,6 +20,11 @@ class User(JSONMixin, AbstractUser):
     # basket # Backref from BasketItem user 1:N
     # messages_sent # Backref from Message user_from 1:N
     # messages_received # Backref from Message user_to 1:N
+
+    def __init__(self, *args, **kwargs):
+        if 'password' in kwargs:
+            kwargs['password'] = make_password(kwargs['password'])
+        super().__init__(self, *args, **kwargs)
 
 
 class Offer(JSONMixin, models.Model):
