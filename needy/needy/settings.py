@@ -25,7 +25,7 @@ SECRET_KEY = 'wp+h(^ot1@ay1iu1o8^wf#n6yqj^$*e=2f0e8vxujyrtn%(ofq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0"]
+ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0", "10.0.2.2"]
 
 
 # Application definition

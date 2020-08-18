@@ -12,10 +12,10 @@ class User(JSONMixin, AbstractUser):
 
     json_fields = ['username', 'first_name', 'last_name', 'email', 'phone', 'offers', 'favorites', 'basket', 'messages_sent', 'messages_received']
 
-    phone = models.CharField(max_length=15, blank=True, default="")
+    phone = models.CharField(max_length=15, blank=True, default="", blank=True)
     # position = models. # Type to determine
 
-    favorites = models.ManyToManyField("Offer", related_name="users")
+    favorites = models.ManyToManyField("Offer", related_name="users", blank=True)
     # tickets # Backref from Ticket user 1:N
     # basket # Backref from BasketItem user 1:N
     # messages_sent # Backref from Message user_from 1:N
