@@ -16,3 +16,15 @@ pip install -r requirements.txt
 cd needy
 python manage.py runserver
 ```
+
+## Update
+
+```
+# On windows
+./venv/Scripts/activate
+
+# On Linux
+source venv/bin/activate
+
+pip install --upgrade -r requirements.txt # may fail once
+```
