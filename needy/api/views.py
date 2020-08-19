@@ -29,7 +29,7 @@ class LoginView(View):
         if user is not None:
             token = Token({'uid': user.id})
             token.sign()
-            return APIResponse(HTTPStatus.OK, "User logged in", str(token))
+            return APIResponse(HTTPStatus.OK, "User logged in", {'token': str(token), 'user': user.serialize(request)})
         else:
             return APIResponse(HTTPStatus.UNAUTHORIZED, "Wrong user credentials")
 
