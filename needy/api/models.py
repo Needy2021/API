@@ -10,7 +10,7 @@ class User(JSONMixin, AbstractUser):
     """
     """
 
-    json_fields = ['username', 'first_name', 'last_name', 'email', 'phone', 'offers', 'favorites', 'basket', 'messages_sent', 'messages_received']
+    json_fields = ['username', 'password', 'first_name', 'last_name', 'email', 'phone', 'offers', 'favorites', 'basket', 'messages_sent', 'messages_received']
 
     phone = models.CharField(max_length=15, blank=True, default="")
     # position = models. # Type to determine
@@ -23,7 +23,7 @@ class User(JSONMixin, AbstractUser):
 
     def save(self, *args, **kwargs):
         if not "_" in self.password:
-            self.password = make_password(self.password)
+            self.set_password(self.password)
         super().save(*args, **kwargs)
 
 
