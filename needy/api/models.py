@@ -34,13 +34,13 @@ class Offer(JSONMixin, models.Model):
     """
     """
 
-    json_fields = ['price', 'title', 'description', 'offeror', 'images', 'comments']
+    json_fields = ['price', 'title', 'description', 'latitude', 'longitude', 'offeror', 'images', 'comments']
 
     price = models.IntegerField()
     title = models.CharField(max_length=128)
     description = models.TextField()
-    # position = models. # Type to determine
-
+    latitude = models.FloatField(default=0)
+    longitude = models.FloatField(default=0)
 
     offeror = models.ForeignKey("User", on_delete=models.CASCADE, related_name="offers")
     # users # Backref from User favorites N:N
