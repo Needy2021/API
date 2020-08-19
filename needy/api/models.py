@@ -10,11 +10,12 @@ class User(JSONMixin, AbstractUser):
     """
     """
 
-    json_fields = ['username', 'password', 'first_name', 'last_name', 'email', 'phone', 'rating', 'offers', 'favorites', 'basket', 'messages_sent', 'messages_received', 'comments']
+    json_fields = ['username', 'password', 'first_name', 'last_name', 'email', 'phone', 'rating', 'latitude', 'longitude', 'offers', 'favorites', 'basket', 'messages_sent', 'messages_received', 'comments']
 
     phone = models.CharField(max_length=15, blank=True, default="")
-    # position = models. # Type to determine
     rating = models.FloatField(default=0)
+    latitude = models.FloatField(default=0)
+    longitude = models.FloatField(default=0)
 
     favorites = models.ManyToManyField("Offer", related_name="users", blank=True)
     # tickets # Backref from Ticket user 1:N
