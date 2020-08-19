@@ -4,9 +4,11 @@ from django.contrib.auth import authenticate
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import get_resolver
+from django.db.models import Func, F
 
 import json
 from http import HTTPStatus
+from math import cos, asin, sqrt, pi
 
 from django_modelapiview import APIView, Token
 from django_modelapiview.responses import APIResponse
@@ -41,6 +43,19 @@ class UserView(APIView):
 class OfferView(APIView):
     model = Offer
     route = "offers"
+
+    def get(self, request, *args, **kwargs):
+        if 'distance' in request.GET:
+            distance =  request.GET.pop('distance')
+            if not 'user' in request.GET:
+                return APIResponse(HTTPStatus.BAD_REQUEST, "distance lookup needs the user lookup")
+            user_id = request.GET.pop('user')
+            user = User.objects.get(id=user_id)
+            # p = pi/180
+            # a = 0.5 - cos((lat2-lat1)*p)/2 + cos(lat1*p) * cos(lat2*p) * (1-cos((lon2-lon1)*p))/2
+            # offer_distance = 12742 * asin(sqrt(a)) #2*R*asin...
+            self.queryset = self.queryset.annotate(distance=Func(F('latitude') - user.latitude, function='ABS') + Func(F('longitude') - user.longitude, function='ABS')).filter(distance__lte=distance)
+        return super().get(request, *args, **kwargs)
 
 
 class BasketItemView(APIView):
