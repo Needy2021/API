@@ -13,7 +13,7 @@ from django_modelapiview.responses import APIResponse
 
 # Create your views here.
 
-from .models import User, Offer, BasketItem, Message, Image
+from .models import User, Offer, BasketItem, Message, Image, Comment
 
 class URLsView(View):
     def get(self, request, **kwargs):
@@ -56,3 +56,8 @@ class MessageView(APIView):
 class ImageView(APIView):
     model = Image
     route = "images"
+
+
+class CommentView(APIView):
+    model = Comment
+    route = "comments"
